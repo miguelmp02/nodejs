@@ -1,0 +1,6 @@
+{
+  "interval": 5000,
+  "showCPU": true,
+  "showMemory": true,
+  "showUptime": true
+}
