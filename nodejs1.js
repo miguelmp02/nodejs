@@ -23,18 +23,17 @@ server.listen(3000, '127.0.0.1', () => {
   console.log('Servidor Node.js en ejecución en http://127.0.0.1:3000/');
 });
 
-const config = {
+let config = {
   interval: 5000, 
   showCPU: true,
   showMemory: true,
   showUptime: true,
 };
 
-fs.writeFile('config.json', JSON.stringify(config, null, 2), (err) => {
-  if (err) {
-    console.error('Error al guardar la configuración en "config.json"');
-  } else {
-    console.log('Configuración guardada en "config.json"');
+fs.readFile('config.json', (err, data) => {
+  if (!err) {
+    config = JSON.parse(data);
+    console.log('Configuración cargada desde "config.json":', config);
   }
 });
 
