@@ -2,20 +2,18 @@ const http = require('http');
 const os = require('os');
 const fs = require('fs');
 
+console.log(`Sistema: ${os.platform()} ${os.release()}`);
+console.log(`Node.js versión: ${process.version}`);
+
 const server = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' });
 
   if (req.url === '/') {
-    res.end(`Sistema: ${os.platform()} ${os.release()}\nNode.js versión: ${process.version}`);
+    res.end('¡Bienvenido al servidor Node.js!');
   } else if (req.url === '/config') {
-    fs.readFile('config.json', (err, data) => {
-      if (err) {
-        res.end('Error al leer la configuración');
-      } else {
-        const config = JSON.parse(data);
-        res.end(JSON.stringify(config, null, 2));
-      }
-    });
+  } else if (req.url === '/system-info') {
+    const systemInfo = `Sistema: ${os.platform()} ${os.release()}\nNode.js versión: ${process.version}`;
+    res.end(systemInfo);
   } else {
     res.end('Ruta no encontrada');
   }
